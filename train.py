@@ -2,28 +2,33 @@
 
 # Roboflow download
 
-import comet_ml
-from comet_ml import Experiment
+# import comet_ml
+# from comet_ml import Experiment
 from ultralytics import YOLO, RTDETR
 
-# Comet
-project_name = "no_more"
-experiment_name = "train_v1"
-comet_ml.login(project_name=project_name)
-experiment = Experiment(project_name=project_name)
-experiment.set_name(experiment_name)
+def train():
+    # # Comet
+    project_name = "no_more"
+    experiment_name = "train_v1"
+    # comet_ml.login(project_name=project_name)
+    # experiment = Experiment(api_key="mxaExOvwSuIZHKt4MpwmZ2mr0", project_name=project_name, )
+    # experiment.set_name(experiment_name)
 
-# Load a model
-model = RTDETR("rtdetr-l.pt")
-# model = YOLO("yolo11l.pt")
+    # Load a model
+    # model = RTDETR("rtdetr-l.pt")
+    model = YOLO("yolo11n.pt")
 
-# Train the model
-results = model.train(
-    data="/content/drive/MyDrive/Maicon/datasets/alldata/train_v4.yaml",
-    project=project_name,
-    name=experiment_name,
-    batch=-1,
-    save_period=1,
-    save_json=True,
-    epochs=100,
-)
+    # Train the model
+    results = model.train(
+        data="C:/Users/Admin/AIFORCE_tools/final/data.yaml",
+        project=project_name,
+        name=experiment_name,
+        batch=1,
+        save_period=1,
+        save_json=True,
+        epochs=5,
+        device=0
+    )
+
+if __name__ == '__main__':
+    train()
